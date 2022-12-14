@@ -29,7 +29,7 @@ jobs:
     - name: Run Py Script
       # You may pin to the exact commit or the version.
       # uses: revanth-reddy/runpy-action@bd650eac0e5e38c42fae951932db067e9c91d6e9
-      uses: revanth-reddy/runpy-action@552d6ea869c7db94ad7c3fac65934f94fe7e1262
+      uses: MRSlouzk/nonebot-plugin-azurlane-assistant-data@552d6ea869c7db94ad7c3fac65934f94fe7e1262
       with:
         # Py script
         script: spider/main.py
