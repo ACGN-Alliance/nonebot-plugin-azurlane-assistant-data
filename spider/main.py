@@ -1,6 +1,4 @@
 # Python Script Created by MRS
-import json
-
 from spider.build_simulator import simulate_data_spider
 from spider.jinghao_rank import download_jinghao_rank
 
