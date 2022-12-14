@@ -1,18 +1,31 @@
 # Python Script Created by MRS
-import asyncio
-
+import asyncio, json, hashlib
 from lxml import etree
-from base_func import get_content
 
-async def main():
+from base_func import get_content
+from const import DATA_PATH, DOMIN
+
+IMG_PATH = "../img/jinghao_rank/"
+rank_lst = ["认知觉醒主线推荐榜.jpg", "认知觉醒大世界推荐榜.jpg", "装备一图榜.jpg", "萌新入坑舰船推荐榜.png", "萌新入坑装备推荐榜.png", "兵装推荐榜.jpg", "专武推荐榜.png", "兑换装备推荐榜.png", "装备研发推荐榜.png", "改造舰船推荐榜.png", "跨队舰船推荐榜.png", "氪金榜.png"]
+
+async def download_jinghao_rank():
     cot = await get_content("https://wiki.biligame.com/blhx/%E4%BA%95%E5%8F%B7%E7%A2%A7%E8%93%9D%E6%A6%9C%E5%90%88%E9%9B%86")
     e = etree.HTML(cot)
-    img_url = e.xpath("//*[@id=\"mw-content-text\"]//img[@alt=\"认知觉醒主线推荐榜.jpg\"]/@src")[0]
-    img = await get_content(img_url)
-    return img
+    with open(DATA_PATH + "jinghao_rank.json", "r", encoding="utf-8") as f:
+        data = json.load(f)
+    count = 0
+    for i in rank_lst:
+        count += 1
+        xpath_path = "//*[@id=\"mw-content-text\"]//img[@alt=\"" + i + "\"]/@src"
+        img: bytes = await get_content(e.xpath(xpath_path)[0])
+        with open(IMG_PATH + i, "wb") as f0:
+            f0.write(img)
+        data[("img" + str(count))] = {
+            "name": i,
+            "hash": hashlib.md5(img).hexdigest()
+        }
+    with open(DATA_PATH + "jinghao_rank.json", "w", encoding="utf-8") as f0:
+        json.dump(data, f0, ensure_ascii=False, indent=4)
 
 if __name__ == '__main__':
-    ig = asyncio.run(main())
-    with open("../data/1.jpg", "wb") as f:
-        f.write(ig)
-#TODO 解决出现大量wiki数据导致的网络崩溃|方案：建立第三方数据库(github)
+    asyncio.run(download_jinghao_rank())

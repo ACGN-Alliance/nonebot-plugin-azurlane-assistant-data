@@ -12,7 +12,7 @@ async def parse(resp: Response) -> dict | str | bytes:
     elif("json" in header):
         resp.encoding="utf-8"
         return resp.json()
-    elif("jpeg" in header or "webp" in header):
+    elif ("image" in header):
         return resp.content
     else:
         resp.encoding="utf-8"
@@ -34,8 +34,7 @@ async def get_content(
     async with AsyncClient(headers=HEADERS, timeout=timeout) as c:
         c: AsyncClient
         resp = await c.get(url=url)
-    cot = await parse(resp)
-    return cot
+    return (await parse(resp))
 
 #For test
 if __name__ == '__main__':
