@@ -2,6 +2,6 @@
 from build_simulator import simulate_data_spider
 from jinghao_rank import download_jinghao_rank
 
-if __name__ == '__main__':
+def run():
     simulate_data_spider()
     download_jinghao_rank()
