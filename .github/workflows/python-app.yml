@@ -28,5 +28,4 @@ jobs:
         pip install httpx lxml
     - name: Run Python
       run: >-
-        cd spider
-        python main.py
+        python spider/main.py
