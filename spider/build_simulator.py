@@ -3,8 +3,10 @@ from base_func import get_content
 from lxml import etree
 import json, asyncio
 
+from const import DATA_PATH
+
 async def simulate_data_spider():
-    with open("../data/pool.json", "r", encoding="utf-8") as f:
+    with open(DATA_PATH + "pool.json", "r", encoding="utf-8") as f:
         data: dict = json.load(f)
     cot = await get_content("https://wiki.biligame.com/blhx/%E5%BB%BA%E9%80%A0%E6%A8%A1%E6%8B%9F%E5%99%A8")
     e = etree.HTML(cot)
@@ -56,8 +58,8 @@ async def simulate_data_spider():
     data["data"]["tx"]["r"] = rate_num[10]
     data["data"]["tx"]["n"] = rate_num[11]
 
-    with open("../data/pool.json", "w", encoding="utf-8") as f2:
+    with open(DATA_PATH + "pool.json", "w", encoding="utf-8") as f2:
         json.dump(data, f2, ensure_ascii=False, indent=4)
 
 if __name__ == '__main__':
-    asyncio.run(main())
+    asyncio.run(simulate_data_spider())
