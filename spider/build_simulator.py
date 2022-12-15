@@ -1,9 +1,9 @@
 # Python Script Created by MRS
-from base_func import get_content
 from lxml import etree
 import json, asyncio
 
 from const import DATA_PATH
+from base_func import get_content
 
 async def simulate_data_spider():
     with open(DATA_PATH + "pool.json", "r", encoding="utf-8") as f:
