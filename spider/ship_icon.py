@@ -22,9 +22,10 @@ def resource_check(
         return True
 
 async def ship_icon_download():
-    print("开始检查图标资源")
+    print("***开始检查图标资源***")
     cot = await get_content("https://wiki.biligame.com/blhx/%E8%88%B0%E8%88%B9%E5%9B%BE%E9%89%B4")
     if(resource_check(cot)):
+        print("***图标无缺失,跳过下载步骤***")
         return
     else:
         e = etree.HTML(cot)
@@ -37,9 +38,9 @@ async def ship_icon_download():
                 i = "赤城(μ兵装)"
             elif(i == "大凤(μ兵装)(鹩(μ兵装))"):
                 i = "大凤(μ兵装)"
-            if("μ兵装" not in i):
-                i = re.sub(r"(\(.*\))", "", i)
-            i = i.replace(".", "")
+            if("μ兵装" not in i):  # 排除兵装舰
+                i = re.sub(r"(\(.*\))", "", i)  # 去除括号以及括号内文本
+            i = i.replace(".", "")  # 改造船
             if (i in local_file_lst):
                 continue
             else:
@@ -49,13 +50,16 @@ async def ship_icon_download():
             return
         else:
             print("需要下载的图标资源有: " + str(file_to_download))
+            num = 0
             for i in file_to_download:
+                num += 1
+                print(f"图标下载进度: {num}/{len(file_to_download)}")
                 xpth_url = "//img[@alt=\"" + i + "头像.jpg\"]/@src"
                 img_url = e.xpath(xpth_url)[0]
                 img = await get_content(img_url)
                 with open(IMG_PATH + i + ".png", "wb") as f:
                     f.write(img)
-            print("图标资源下载完成")
+            print("***图标资源下载完成***")
 
 if __name__ == '__main__':
     asyncio.run(ship_icon_download())

@@ -6,6 +6,7 @@ from const import DATA_PATH
 from base_func import get_content
 
 async def simulate_data_spider():
+    print("***开始同步\"建造模拟器\"数据***")
     with open(DATA_PATH + "pool.json", "r", encoding="utf-8") as f:
         data: dict = json.load(f)
     cot = await get_content("https://wiki.biligame.com/blhx/%E5%BB%BA%E9%80%A0%E6%A8%A1%E6%8B%9F%E5%99%A8")
@@ -60,6 +61,8 @@ async def simulate_data_spider():
 
     with open(DATA_PATH + "pool.json", "w", encoding="utf-8") as f2:
         json.dump(data, f2, ensure_ascii=False, indent=4)
+
+    print("***建造池数据同步完成***")
 
 if __name__ == '__main__':
     asyncio.run(simulate_data_spider())
