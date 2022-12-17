@@ -1,8 +1,5 @@
 # Python Script Created by MRS
-# Python Script Created by MRS
-import asyncio, json
-import os.path, sys
-
+import json
 from lxml import etree
 
 from base_func import get_content
@@ -27,7 +24,11 @@ async def download_japan_ship_contrast():
                 }
         with open(DATA_PATH + "japan_ship_name.json", "w", encoding="utf-8") as f:
             json.dump(local_data, f, ensure_ascii=False, indent=4)
+
+        with open(DATA_PATH + "test.json", "w", encoding="utf-8") as f:
+            json.dump({"1":"For test"}, f, ensure_ascii=False, indent=4)
         print("***重樱船名对照数据同步完成***")
 
 if __name__ == '__main__':
+    import asyncio
     asyncio.run(download_japan_ship_contrast())

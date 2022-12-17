@@ -1,6 +1,4 @@
 # Python Script Created by MRS
-import asyncio
-
 from build_simulator import simulate_data_spider
 from jinghao_rank import download_jinghao_rank
 from ship_icon import ship_icon_download
@@ -15,4 +13,5 @@ async def run():
     print("*****资源同步完成*****")
 
 if __name__ == '__main__':
+    import asyncio
     asyncio.run(run())

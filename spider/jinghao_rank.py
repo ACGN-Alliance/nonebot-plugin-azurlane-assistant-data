@@ -1,8 +1,8 @@
 # Python Script Created by MRS
-import asyncio, json, hashlib
+import json, hashlib
 from lxml import etree
 
-from base_func import get_content
+from base_func import get_content, check_path
 from const import DATA_PATH, IMG_PATH
 
 img_path = IMG_PATH + "jinghao_rank/"
@@ -10,6 +10,7 @@ rank_lst = ["认知觉醒主线推荐榜.jpg", "认知觉醒大世界推荐榜.j
 
 async def download_jinghao_rank():
     print("***开始同步井号榜数据***")
+    await check_path([img_path, DATA_PATH])
     cot = await get_content("https://wiki.biligame.com/blhx/%E4%BA%95%E5%8F%B7%E7%A2%A7%E8%93%9D%E6%A6%9C%E5%90%88%E9%9B%86")
     e = etree.HTML(cot)
     with open(DATA_PATH + "jinghao_rank.json", "r", encoding="utf-8") as f:
@@ -32,4 +33,5 @@ async def download_jinghao_rank():
     print("***井号榜数据同步完毕***")
 
 if __name__ == '__main__':
+    import asyncio
     asyncio.run(download_jinghao_rank())

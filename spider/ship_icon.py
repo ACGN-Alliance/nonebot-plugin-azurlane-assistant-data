@@ -1,8 +1,8 @@
 # Python Script Created by MRS
-import asyncio, os, json, re
+import os, json, re
 from lxml import etree
 
-from base_func import get_content
+from base_func import get_content, check_path
 from const import IMG_PATH
 
 img_path = IMG_PATH + "ship_icon/"
@@ -24,6 +24,7 @@ def resource_check(
 
 async def ship_icon_download():
     print("***开始检查图标资源***")
+    await check_path(img_path)
     cot = await get_content("https://wiki.biligame.com/blhx/%E8%88%B0%E8%88%B9%E5%9B%BE%E9%89%B4")
     if(resource_check(cot)):
         print("***图标无缺失,跳过下载步骤***")
@@ -63,4 +64,5 @@ async def ship_icon_download():
             print("***图标资源下载完成***")
 
 if __name__ == '__main__':
+    import asyncio
     asyncio.run(ship_icon_download())
