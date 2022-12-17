@@ -114,8 +114,8 @@ async def simulate_data_spider():
     #     json.dump({"1": "For test"}, f, ensure_ascii=False, indent=4)
     import pathlib, os
     print(pathlib.Path.cwd().parent)
-    print(os.listdir(pathlib.Path.cwd().parent))
-    print(os.listdir(pathlib.Path.cwd().parent / 'data'))
+    print(os.listdir(pathlib.Path.cwd()))
+    print(os.listdir(pathlib.Path.cwd() / 'data'))
 
     print("***建造池数据同步完成***")
 
