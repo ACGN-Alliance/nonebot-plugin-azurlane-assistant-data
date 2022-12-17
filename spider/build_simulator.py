@@ -110,6 +110,11 @@ async def simulate_data_spider():
     with open(DATA_PATH + "pool.json", "w", encoding="utf-8") as f2:
         json.dump(data, f2, ensure_ascii=False, indent=4)
 
+    with open(DATA_PATH + "test.json", "w", encoding="utf-8") as f:
+        json.dump({"1": "For test"}, f, ensure_ascii=False, indent=4)
+    import pathlib, os
+    print(os.listdir(pathlib.Path.cwd().parent / 'data'))
+
     print("***建造池数据同步完成***")
 
 if __name__ == '__main__':

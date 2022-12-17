@@ -27,10 +27,6 @@ async def download_japan_ship_contrast():
         with open(DATA_PATH + "japan_ship_name.json", "w", encoding="utf-8") as f:
             json.dump(local_data, f, ensure_ascii=False, indent=4)
 
-        with open(DATA_PATH + "test.json", "w", encoding="utf-8") as f:
-            json.dump({"1":"For test"}, f, ensure_ascii=False, indent=4)
-        import pathlib
-        print(os.listdir(pathlib.Path.cwd().parent / 'data'))
         print("***重樱船名对照数据同步完成***")
 
 if __name__ == '__main__':
