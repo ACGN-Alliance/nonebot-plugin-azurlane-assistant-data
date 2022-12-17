@@ -8,8 +8,7 @@ on:
   schedule:
     - cron: "0 8 * * *"
 
-permissions:
-  contents: read
+permissions: write-all
 
 jobs:
   build:
@@ -28,3 +27,9 @@ jobs:
         pip install httpx lxml
     - name: Run
       run: sh autorun.sh
+    - name: Commit
+      run: |
+        git config user.name github-actions[bot]
+        git config user.email github-actions[bot]@users.noreply.github.com
+        git commit -m "Update data" -a || exit 0
+        git push
