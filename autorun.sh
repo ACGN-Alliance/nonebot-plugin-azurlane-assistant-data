@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-python scripts/main.py
+python spider/main.py
