@@ -3,9 +3,9 @@ import asyncio, json, hashlib
 from lxml import etree
 
 from base_func import get_content
-from const import DATA_PATH, DOMIN
+from const import DATA_PATH, IMG_PATH
 
-IMG_PATH = "../img/jinghao_rank/"
+img_path = IMG_PATH + "jinghao_rank/"
 rank_lst = ["认知觉醒主线推荐榜.jpg", "认知觉醒大世界推荐榜.jpg", "装备一图榜.jpg", "萌新入坑舰船推荐榜.png", "萌新入坑装备推荐榜.png", "兵装推荐榜.jpg", "专武推荐榜.png", "兑换装备推荐榜.png", "装备研发推荐榜.png", "改造舰船推荐榜.png", "跨队舰船推荐榜.png", "氪金榜.png"]
 
 async def download_jinghao_rank():
@@ -19,7 +19,7 @@ async def download_jinghao_rank():
         count += 1
         xpath_path = "//*[@id=\"mw-content-text\"]//img[@alt=\"" + i + "\"]/@src"
         img: bytes = await get_content(e.xpath(xpath_path)[0])
-        with open(IMG_PATH + i, "wb") as f0:
+        with open(img_path + i, "wb") as f0:
             f0.write(img)
         data[("img" + str(count))] = {
             "name": i,

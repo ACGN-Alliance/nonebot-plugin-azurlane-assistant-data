@@ -1,4 +1,6 @@
 # Python Script Created by MRS
+import os
+
 from lxml import etree
 import json, asyncio
 

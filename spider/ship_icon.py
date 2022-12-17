@@ -3,15 +3,16 @@ import asyncio, os, json, re
 from lxml import etree
 
 from base_func import get_content
+from const import IMG_PATH
 
-IMG_PATH = "../img/ship_icon/"
+img_path = IMG_PATH + "ship_icon/"
 
 def resource_check(
         page: str
     ) -> bool:
     e = etree.HTML(page)
     num = len(e.xpath("//div[@class=\"jntj-2\"]/div[1]//img/@src"))
-    if (len(os.listdir(IMG_PATH)) != num):
+    if (len(os.listdir(img_path)) != num):
         with open("../data/ship_icon.json", "w", encoding="utf-8") as f:
             dic = {
                 "num": str(num)
@@ -29,7 +30,7 @@ async def ship_icon_download():
         return
     else:
         e = etree.HTML(cot)
-        local_file_lst = os.listdir(IMG_PATH)
+        local_file_lst = os.listdir(img_path)
         file_to_download = []
         for i in local_file_lst:
             local_file_lst[local_file_lst.index(i)] = i.split(".")[0] #去除文件后缀名
@@ -57,7 +58,7 @@ async def ship_icon_download():
                 xpth_url = "//img[@alt=\"" + i + "头像.jpg\"]/@src"
                 img_url = e.xpath(xpth_url)[0]
                 img = await get_content(img_url)
-                with open(IMG_PATH + i + ".png", "wb") as f:
+                with open(img_path + i + ".png", "wb") as f:
                     f.write(img)
             print("***图标资源下载完成***")
 
