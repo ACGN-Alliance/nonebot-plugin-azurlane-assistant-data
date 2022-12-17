@@ -1,5 +1,7 @@
 # Python Script Created by MRS
 import json
+import os
+
 from lxml import etree
 
 from base_func import get_content
@@ -27,6 +29,8 @@ async def download_japan_ship_contrast():
 
         with open(DATA_PATH + "test.json", "w", encoding="utf-8") as f:
             json.dump({"1":"For test"}, f, ensure_ascii=False, indent=4)
+        import pathlib
+        print(os.listdir(pathlib.Path.cwd().parent / 'data'))
         print("***重樱船名对照数据同步完成***")
 
 if __name__ == '__main__':
