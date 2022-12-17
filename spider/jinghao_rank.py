@@ -13,8 +13,7 @@ async def download_jinghao_rank():
     await check_path([img_path, DATA_PATH])
     cot = await get_content("https://wiki.biligame.com/blhx/%E4%BA%95%E5%8F%B7%E7%A2%A7%E8%93%9D%E6%A6%9C%E5%90%88%E9%9B%86")
     e = etree.HTML(cot)
-    with open(DATA_PATH + "jinghao_rank.json", "r", encoding="utf-8") as f:
-        data = json.load(f)
+    data: dict = {}
     count = 0
     for i in rank_lst:
         count += 1
