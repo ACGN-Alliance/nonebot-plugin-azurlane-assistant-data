@@ -5,12 +5,60 @@ import json
 from const import DATA_PATH
 from base_func import get_content, check_path
 
+init_pool = {
+    "qx": {
+        "ssr": [],
+        "sr": [],
+        "r": [],
+        "n": []
+    },
+    "zx": {
+        "ssr": [],
+        "sr": [],
+        "r": [],
+        "n": []
+    },
+    "tx": {
+        "ssr": [],
+        "sr": [],
+        "r": [],
+        "n": []
+    },
+    "xd": {},
+    "data": {
+        "qx": {
+            "ssr": 0,
+            "sr": 0,
+            "r": 0,
+            "n": 0
+        },
+        "zx": {
+            "ssr": 0,
+            "sr": 0,
+            "r": 0,
+            "n": 0
+        },
+        "tx": {
+            "ssr": 0,
+            "sr": 0,
+            "r": 0,
+            "n": 0
+        },
+        "xd": {
+            "ssr": 0,
+            "sr": 0,
+            "r": 0,
+            "n": 0
+        }
+    }
+}
+
 async def simulate_data_spider():
     print("***开始同步\"建造模拟器\"数据***")
-    with open(DATA_PATH + "pool.json", "r", encoding="utf-8") as f:
-        data: dict = json.load(f)
-    # await check_path(DATA_PATH + "simulate_data.json")
-    # data = init_pool
+    # with open(DATA_PATH + "pool.json", "r", encoding="utf-8") as f:
+    #     data: dict = json.load(f)
+    await check_path(DATA_PATH + "simulate_data.json")
+    data = init_pool
     cot = await get_content("https://wiki.biligame.com/blhx/%E5%BB%BA%E9%80%A0%E6%A8%A1%E6%8B%9F%E5%99%A8")
     e = etree.HTML(cot)
     for i in e.xpath("//td[@id=\"LightShipBuildingListSuperRare\"]//span/@title"):
