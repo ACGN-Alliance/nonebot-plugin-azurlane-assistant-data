@@ -1,4 +1,6 @@
 # Python Script Created by MRS
+from typing import List
+
 from lxml import etree
 import json
 
@@ -24,7 +26,7 @@ init_pool = {
         "r": [],
         "n": []
     },
-    "xd": {},
+    "xd": [],
     "data": {
         "qx": {
             "ssr": 0,
@@ -55,9 +57,7 @@ init_pool = {
 
 async def simulate_data_spider():
     print("***开始同步\"建造模拟器\"数据***")
-    # with open(DATA_PATH + "pool.json", "r", encoding="utf-8") as f:
-    #     data: dict = json.load(f)
-    await check_path(DATA_PATH + "simulate_data.json")
+    await check_path(DATA_PATH)
     data = init_pool
     cot = await get_content("https://wiki.biligame.com/blhx/%E5%BB%BA%E9%80%A0%E6%A8%A1%E6%8B%9F%E5%99%A8")
     e = etree.HTML(cot)
@@ -88,6 +88,28 @@ async def simulate_data_spider():
     for i in e.xpath("//td[@id=\"AircraftShipBuildingListNormal\"]//span/@title"):
         data["tx"]["n"].append(i)
 
+    ######## 特型 ########
+    cot0 = await get_content("https://wiki.biligame.com/blhx/%E5%BB%BA%E9%80%A0%E6%A8%A1%E6%8B%9F%E5%99%A8/%E9%99%90%E6%97%B6%E5%BB%BA%E9%80%A0")
+    e0 = etree.HTML(cot0)
+    temp_lst: List[dict] = []
+    for j in e0.xpath("//tr[@class=\"speciallist\"]//span[@class=\"nowrap\"]/@style"):
+        if(j == "color:#ee494c"):
+            j = "ur"
+        elif(j == "color:#c90"):
+            j = "ssr"
+        elif(j == "color:#8000ff"):
+            j = "sr"
+        else:
+            j = "r"
+        temp_lst.append({"name": "", "rarity": j, "rate": 0})
+    ship_info = e0.xpath("//tr[@class=\"speciallist\"]//span/text()")
+    for i in range(len(temp_lst) * 2):
+        if(i % 2 != 0):
+            continue
+        temp_lst[int(int(i) / 2)]["name"] = ship_info[i+1]
+        temp_lst[int(int(i) / 2)]["rate"] = float(ship_info[i]) / 100
+    ####################
+
     rate = e.xpath("//div[@class=\"LotusRoot\"]//tr[1]/th/text()")
     rate_num: list = []
     for i in rate:
@@ -111,13 +133,6 @@ async def simulate_data_spider():
 
     with open(DATA_PATH + "pool.json", "w", encoding="utf-8") as f2:
         json.dump(data, f2, ensure_ascii=False, indent=4)
-
-    # with open(DATA_PATH + "test.json", "w", encoding="utf-8") as f:
-    #     json.dump({"1": "For test"}, f, ensure_ascii=False, indent=4)
-    # import pathlib, os
-    # print(pathlib.Path.cwd().parent)
-    # print(os.listdir(pathlib.Path.cwd()))
-    # print(os.listdir(pathlib.Path.cwd() / 'data'))
 
     print("***建造池数据同步完成***")
 
