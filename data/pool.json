@@ -261,7 +261,28 @@
             "竞技神"
         ]
     },
-    "xd": {},
+    "xd": [
+        {
+            "name": "约克城II",
+            "rarity": "ur",
+            "rate": 0.012
+        },
+        {
+            "name": "北安普敦II",
+            "rarity": "ssr",
+            "rate": 0.02
+        },
+        {
+            "name": "哈曼II",
+            "rarity": "sr",
+            "rate": 0.025
+        },
+        {
+            "name": "大黄蜂II",
+            "rarity": "ssr",
+            "rate": 0.005
+        }
+    ],
     "data": {
         "qx": {
             "ssr": 0.07,
