@@ -108,6 +108,9 @@ async def simulate_data_spider():
             continue
         temp_lst[int(int(i) / 2)]["name"] = ship_info[i+1]
         temp_lst[int(int(i) / 2)]["rate"] = float(ship_info[i]) / 100
+
+    for i in temp_lst:
+        data["xd"].append(i)
     ####################
 
     rate = e.xpath("//div[@class=\"LotusRoot\"]//tr[1]/th/text()")
