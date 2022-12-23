@@ -13,7 +13,7 @@ def resource_check(
     e = etree.HTML(page)
     num = len(e.xpath("//div[@class=\"jntj-2\"]/div[1]//img/@src"))
     if (len(os.listdir(img_path)) != num):
-        with open(DATA_PATH + "ship_icon.json", "r", encoding="utf-8") as f:
+        with open(DATA_PATH + "ship_icon.json", "w", encoding="utf-8") as f:
             dic = {
                 "num": str(num)
             }
