@@ -1,19 +1,19 @@
 {
     "img1": {
         "name": "认知觉醒主线推荐榜.jpg",
-        "hash": "8d5b1c80c4607bc7dec8922387301fec"
+        "hash": "e6f3e7f0425edbc9da36804aff3006eb"
     },
     "img2": {
         "name": "认知觉醒大世界推荐榜.jpg",
-        "hash": "6fe91eefa1d89cb56a29fefd029b5c30"
+        "hash": "ae30d7044c5309d3b336b40f96f43e02"
     },
     "img3": {
         "name": "装备一图榜.jpg",
-        "hash": "85092260fe228369a846460408785d39"
+        "hash": "1d6040b9a0162745a2ef23e3f0d80fe2"
     },
     "img4": {
         "name": "萌新入坑舰船推荐榜.png",
-        "hash": "77dd860e8ea4f16fd6691e07b80b344b"
+        "hash": "636318d91b009a130e1a38a01e5dfa7b"
     },
     "img5": {
         "name": "萌新入坑装备推荐榜.png",
@@ -25,19 +25,19 @@
     },
     "img7": {
         "name": "专武推荐榜.png",
-        "hash": "af588dde53683fec246100d99942cb95"
+        "hash": "fa9519bbdc94c8df0245e5498b26a830"
     },
     "img8": {
         "name": "兑换装备推荐榜.png",
-        "hash": "70dc47a6f326b6727a0c6d0bb949d163"
+        "hash": "0bb97f89ffbec937c81c87a134324794"
     },
     "img9": {
         "name": "装备研发推荐榜.png",
-        "hash": "f12a8fb05eb76a29b311aee27ced81b3"
+        "hash": "d03cedbe50abc33676fcb3800ce7fd7a"
     },
     "img10": {
         "name": "改造舰船推荐榜.png",
-        "hash": "3072a75f70dd63e4336f4df930d10b39"
+        "hash": "c29f1613f776313107ff16c787969752"
     },
     "img11": {
         "name": "跨队舰船推荐榜.png",
@@ -45,6 +45,6 @@
     },
     "img12": {
         "name": "氪金榜.png",
-        "hash": "5a8b1995f88ea00b7e69b21744eec003"
+        "hash": "a08ebcf8d7791be68eb38bd93a5e40e6"
     }
 }
