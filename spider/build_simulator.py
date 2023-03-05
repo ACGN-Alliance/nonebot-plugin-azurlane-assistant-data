@@ -118,7 +118,8 @@ async def simulate_data_spider():
             continue
         temp_lst[int(int(i) / 2)]["name"] = ship_info[i+1]
         temp_lst[int(int(i) / 2)]["rate"] = float(ship_info[i]) / 100
-        data["data"]["xd"][j] -= float(ship_info[i]) / 100 # 限定池的概率数据扣除限定UP的数据
+        rar = temp_lst[int(int(i) / 2)]["rarity"]
+        data["data"]["xd"][rar] -= float(ship_info[i]) / 100 # 限定池的概率数据扣除限定UP的数据
 
     for i in temp_lst:
         data["xd"].append(i)
