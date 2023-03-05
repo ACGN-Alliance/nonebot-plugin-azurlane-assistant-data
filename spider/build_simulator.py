@@ -57,6 +57,11 @@ init_pool = {
 
 async def simulate_data_spider():
     print("***开始同步\"建造模拟器\"数据***")
+    xd_ssr_rate = 0.07
+    xd_sr_rate = 0.12
+    xd_r_rate = 0.51
+    xd_n_rate = 0.3 # 限定池的其他船原始概率数据
+
     await check_path(DATA_PATH)
     data = init_pool
     cot = await get_content("https://wiki.biligame.com/blhx/%E5%BB%BA%E9%80%A0%E6%A8%A1%E6%8B%9F%E5%99%A8")
@@ -88,7 +93,12 @@ async def simulate_data_spider():
     for i in e.xpath("//td[@id=\"AircraftShipBuildingListNormal\"]//span/@title"):
         data["tx"]["n"].append(i)
 
-    ######## 特型 ########
+    ######## 限定 ########
+    data["data"]["xd"]["ssr"] = 0.07
+    data["data"]["xd"]["sr"] = 0.12
+    data["data"]["xd"]["r"] = 0.51
+    data["data"]["xd"]["n"] = 0.3
+
     cot0 = await get_content("https://wiki.biligame.com/blhx/%E5%BB%BA%E9%80%A0%E6%A8%A1%E6%8B%9F%E5%99%A8/%E9%99%90%E6%97%B6%E5%BB%BA%E9%80%A0")
     e0 = etree.HTML(cot0)
     temp_lst: List[dict] = []
@@ -108,6 +118,7 @@ async def simulate_data_spider():
             continue
         temp_lst[int(int(i) / 2)]["name"] = ship_info[i+1]
         temp_lst[int(int(i) / 2)]["rate"] = float(ship_info[i]) / 100
+        data["data"]["xd"][j] -= float(ship_info[i]) / 100 # 限定池的概率数据扣除限定UP的数据
 
     for i in temp_lst:
         data["xd"].append(i)
