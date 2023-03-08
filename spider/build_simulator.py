@@ -151,7 +151,3 @@ async def simulate_data_spider():
         json.dump(data, f2, ensure_ascii=False, indent=4)
 
     print("***建造池数据同步完成***")
-
-if __name__ == '__main__':
-    import asyncio
-    asyncio.run(simulate_data_spider())
