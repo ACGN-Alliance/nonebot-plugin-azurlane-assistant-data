@@ -6,9 +6,6 @@ sys.path.append(".")
 async def run():
     await build_data()
 
-if platform.platform == "Windows":
-    import asyncio
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(run())
-else:
-    run()
+import asyncio
+loop = asyncio.get_event_loop()
+loop.run_until_complete(run())

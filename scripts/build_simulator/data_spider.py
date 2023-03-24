@@ -68,4 +68,4 @@ async def build_data():
     with open(pathlib.Path.cwd()+"/azurlane/pool.json", "w", encoding="utf-8") as f:
         json.dump(init_data, f, ensure_ascii=False, indent=4)
 
-    return init_data
+    # return init_data
