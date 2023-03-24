@@ -65,7 +65,7 @@ async def build_data():
     init_data["data"]["tx"]["n"] = rate[11]
 
     import pathlib, json
-    with open(pathlib.Path.cwd()+"/azurlane/pool.json", "w", encoding="utf-8") as f:
+    with open(pathlib.Path.cwd() + pathlib.Path("/azurlane/pool.json"), "w", encoding="utf-8") as f:
         json.dump(init_data, f, ensure_ascii=False, indent=4)
 
     # return init_data
