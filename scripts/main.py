@@ -1,12 +1,14 @@
 from build_simulator.data_spider import build_data
 
-import sys
+import sys, platform
 sys.path.append(".")
 
 async def run():
     await build_data()
 
-if __name__ == "__main__":
-    import asyncio, json
+if platform.platform == "Windows":
+    import asyncio
     loop = asyncio.get_event_loop()
-    data = (loop.run_until_complete(build_data()))
+    loop.run_until_complete(run())
+else:
+    run()
