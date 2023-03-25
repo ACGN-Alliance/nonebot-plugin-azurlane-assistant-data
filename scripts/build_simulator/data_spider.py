@@ -68,4 +68,5 @@ async def build_data():
     with open(str(pathlib.Path.cwd()) + "/azurlane/pool.json", "w", encoding="utf-8") as f:
         json.dump(init_data, f, ensure_ascii=False, indent=4)
 
+    print("===同步\"建造模拟器\"数据完成===")
     # return init_data
