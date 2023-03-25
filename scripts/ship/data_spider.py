@@ -18,9 +18,6 @@ async def ship_data():
 
     slist = []
     for ship in soup.find_all("div", class_="jntj-1 divsort"):
-        # name = ship.find("a")["title"]
-        # if(ship.find("span", class_="jntj-4").text.find("改") != -1):
-        #     name += ".改"
         alias = []
         for i in ship.find_all("span", class_="jntj-4"):
             pattern = re.compile(r">(?P<raw>.*?)<br/>(?P<now>.*?)<")
