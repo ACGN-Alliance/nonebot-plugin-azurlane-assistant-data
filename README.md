@@ -5,6 +5,8 @@
 
 <b>欢迎各位进行[Pr](https://github.com/MRSlouzk/nonebot-plugin-azurlane-assistant-data/pulls)帮助更新数据源</b>
 
+本仓库已建立Gitee镜像仓库供国内进行快速访问 [Gitee](https://gitee.com/mrslouzk/nonebot-plugin-azurlane-assistant-data)
+
 # 数据内容
 - [建造池数据](https://github.com/MRSlouzk/nonebot-plugin-azurlane-assistant-data/blob/main/data/pool.json)
 - [舰船数据]()
@@ -16,7 +18,7 @@
 # 更新计划
 - ~~舰船数据爬取~~
 - 提供标准调用函数
-- 添加Gitee镜像仓库
+- ~~添加Gitee镜像仓库~~
 - 代码大幅优化与重构
 - 部署成api方便调用(可能不会做)
 
