@@ -5,7 +5,7 @@ import sys, platform
 sys.path.append(".")
 
 async def run():
-    # await build_data()
+    await build_data()
     await ship_data()
 
 import asyncio
