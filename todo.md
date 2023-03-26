@@ -1,0 +1,13 @@
+# 未来爬取清单
+- [ ] 各个舰船的具体数据(主要问题:数据的大量存储;解决方案: [blhx-wiki](https://github.com/DK09/blhx-wiki/tree/master/image/ship)) 需要获取的内容:[bwiki](https://wiki.biligame.com/blhx/%E8%88%B0%E8%88%B9%E5%9B%BE%E9%89%B4)
+- [ ] 装备列表(解决方案: [blhx-wiki](https://wiki.biligame.com/blhx/%E8%A3%85%E5%A4%87%E5%9B%BE%E9%89%B4))
+- [ ] 特殊兵装信息(需要图片连带渲染, 效果图见上二) [bwiki](https://wiki.biligame.com/blhx/%E7%89%B9%E6%AE%8A%E5%85%B5%E8%A3%85%E5%9B%BE%E9%89%B4)
+- [ ] 井号榜单 [bwiki](https://wiki.biligame.com/blhx/%E4%BA%95%E5%8F%B7%E7%A2%A7%E8%93%9D%E6%A6%9C%E5%90%88%E9%9B%86)
+- [ ] 限时建造存档区数据 [bwiki](https://wiki.biligame.com/blhx/%E5%BB%BA%E9%80%A0%E6%A8%A1%E6%8B%9F%E5%99%A8/%E9%99%90%E6%97%B6%E5%BB%BA%E9%80%A0)
+- [ ] 各个舰船好感度语音+台词 需要做好分类 [bwiki](https://wiki.biligame.com/blhx/%E8%88%B0%E8%88%B9%E5%9B%BE%E9%89%B4)
+- [ ] 各个舰船的立绘 需要做好分类 [bwiki](https://wiki.biligame.com/blhx/%E8%88%B0%E8%88%B9%E5%9B%BE%E9%89%B4)
+- [ ] 各个关卡数据截图(手动截图好一些，playwright太麻烦) [bwiki](https://wiki.biligame.com/blhx/%E7%AC%AC%E4%B8%80%E7%AB%A0) 关卡基本信息和掉落信息放进去就行，包括作战档案
+- [ ] 建造时长，把图标名也带上 [bwiki](https://wiki.biligame.com/blhx/%E5%BB%BA%E9%80%A0%E6%97%B6%E9%97%B4)
+- [ ] 船名对照表，重樱的需要加上拼音数据 [bwiki](https://wiki.biligame.com/blhx/%E8%88%B0%E8%88%B9%E5%90%8D%E7%A7%B0%E5%AF%B9%E7%85%A7%E8%A1%A8#%E9%87%8D%E6%A8%B1%E8%88%B0%E8%88%B9%E5%90%8D%E7%A7%B0%E5%AF%B9%E7%85%A7%E8%A1%A8)
+- [ ] 游戏活动记录，需要时间点和活动性质，以及活动的跳转链接 [bwiki](https://wiki.biligame.com/blhx/%E6%B8%B8%E6%88%8F%E6%B4%BB%E5%8A%A8%E8%A1%A8)
+- [ ] 碧蓝回忆录，量力而行（需要全部剧情内容以及对应章节并分类）[bwiki](https://wiki.biligame.com/blhx/%E7%A2%A7%E8%93%9D%E5%9B%9E%E5%BF%86%E5%BD%95)

@@ -21,6 +21,7 @@
 - ~~添加Gitee镜像仓库~~
 - 代码大幅优化与重构
 - 部署成api方便调用(可能不会做)
+- 详情请见[todo](./todo.md)
 
 # 如何进行Pull Request
 - fork本仓库
