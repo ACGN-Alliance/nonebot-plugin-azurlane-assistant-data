@@ -1,4 +1,4 @@
-import sys, os, json, re
+import sys, os, json, re, pathlib
 sys.path.append(os.curdir)
 from bs4 import BeautifulSoup
 
@@ -58,6 +58,6 @@ async def ship_data():
         sdata = ship.json(ensure_ascii=False)
         slist.append(json.loads(sdata))
     
-    with open("azurlane/ship.json", "w", encoding="utf-8") as f:
+    with open(str(pathlib.Path.cwd()) + "/azurlane/ship.json", "w", encoding="utf-8") as f:
         json.dump({"total_num": leng, "data": slist}, f, ensure_ascii=False, indent=4)
     print("===舰船资料同步完成===")
