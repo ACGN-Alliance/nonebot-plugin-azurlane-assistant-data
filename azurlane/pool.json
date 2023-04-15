@@ -275,14 +275,9 @@
     },
     "xd": [
         {
-            "name": "伏罗希洛夫",
-            "rarity": "ssr",
-            "rate": 2.0
-        },
-        {
-            "name": "塞瓦斯托波尔",
+            "name": "福煦",
             "rarity": "sr",
-            "rate": 2.5
+            "rate": 1.4
         }
     ],
     "data": {

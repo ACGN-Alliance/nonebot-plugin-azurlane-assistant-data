@@ -1,20 +1,20 @@
-import sys, os, json, re, pathlib
+import os, json, re, pathlib
 
-sys.path.append(os.curdir)
 from bs4 import BeautifulSoup
 
 from scripts.ship.ship_model import Ship
 from scripts.utils import get_content
 
 
-async def ship_data():
+def ship_data():
     print("===开始同步\"舰船资料\"数据===")
     url_prefix = "https://wiki.biligame.com"
-    cot = await get_content("https://wiki.biligame.com/blhx/%E8%88%B0%E8%88%B9%E5%9B%BE%E9%89%B4")
+    cot = get_content("https://wiki.biligame.com/blhx/%E8%88%B0%E8%88%B9%E5%9B%BE%E9%89%B4")
     soup = BeautifulSoup(cot, "html.parser")
 
     leng = len(soup.find_all("div", class_="jntj-1 divsort"))
-    if json.load(open("azurlane/ship.json", "r", encoding="utf-8"))["total_num"] == leng:
+    print(os.getcwd())
+    if json.load(open(f"{str(pathlib.Path.cwd().parent)}/azurlane/ship.json", "r", encoding="utf-8"))["total_num"] == leng:
         print("===舰船资料无更新,跳过同步步骤===")
         return
 
@@ -60,6 +60,6 @@ async def ship_data():
         sdata = ship.json(ensure_ascii=False)
         slist.append(json.loads(sdata))
 
-    with open(str(pathlib.Path.cwd()) + "/azurlane/ship.json", "w", encoding="utf-8") as f:
+    with open(f"{str(pathlib.Path.cwd().parent)}/azurlane/ship.json", "w", encoding="utf-8") as f:
         json.dump({"total_num": leng, "data": slist}, f, ensure_ascii=False, indent=4)
     print("===舰船资料同步完成===")

@@ -2,7 +2,7 @@ from httpx import AsyncClient, Response
 from typing import List
 
 
-async def check_path(path: str | List[str]):
+def check_path(path: str | List[str]):
     """
     检查路径是否存在，不存在则创建
 
@@ -20,7 +20,7 @@ async def check_path(path: str | List[str]):
         raise TypeError("path type error")
 
 
-async def parse(resp: Response) -> dict | str | bytes:
+def parse(resp: Response) -> dict | str | bytes:
     """
     解析响应
 
@@ -41,7 +41,7 @@ async def parse(resp: Response) -> dict | str | bytes:
         return resp.text
 
 
-async def get_content(
+def get_content(
         url: str,
         timeout: int = 10
 ) -> dict | str | bytes:
@@ -56,8 +56,6 @@ async def get_content(
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.63"
     }
-
-    async with AsyncClient(headers=HEADERS, timeout=timeout) as c:
-        c: AsyncClient
-        resp = await c.get(url=url)
-    return (await parse(resp))
+    from httpx import get
+    resp = get(url, headers=HEADERS, timeout=timeout)
+    return parse(resp)
