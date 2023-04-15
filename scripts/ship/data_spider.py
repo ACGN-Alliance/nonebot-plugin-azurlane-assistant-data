@@ -1,9 +1,11 @@
 import sys, os, json, re, pathlib
+
 sys.path.append(os.curdir)
 from bs4 import BeautifulSoup
 
 from scripts.ship.ship_model import Ship
 from scripts.utils import get_content
+
 
 async def ship_data():
     print("===开始同步\"舰船资料\"数据===")
@@ -22,22 +24,22 @@ async def ship_data():
         for i in ship.find_all("span", class_="jntj-4"):
             pattern = re.compile(r">(?P<raw>.*?)<br/>(?P<now>.*?)<")
             match = re.search(pattern, str(i.contents[-1]))
-            if(match is None):
+            if match is None:
                 name = i.text
                 break
             name = match.group("now")
             alias.append(match.group("raw"))
 
         iname = ship.find("div", class_="jntj-3").find("img")["alt"]
-        if(iname.find("决战方案") != -1 or iname.find("海上传奇") != -1):
+        if iname.find("决战方案") != -1 or iname.find("海上传奇") != -1:
             rarity = 4
-        elif(iname.find("超稀有") != -1 or iname.find("最高方案") != -1):
+        elif iname.find("超稀有") != -1 or iname.find("最高方案") != -1:
             rarity = 3
-        elif(iname.find("精锐") != -1):
+        elif iname.find("精锐") != -1:
             rarity = 2
-        elif(iname.find("稀有") != -1):
+        elif iname.find("稀有") != -1:
             rarity = 1
-        elif(iname.find("普通") != -1):
+        elif iname.find("普通") != -1:
             rarity = 0
         else:
             print(f"稀有度出错:{name}\n")
@@ -57,7 +59,7 @@ async def ship_data():
         )
         sdata = ship.json(ensure_ascii=False)
         slist.append(json.loads(sdata))
-    
+
     with open(str(pathlib.Path.cwd()) + "/azurlane/ship.json", "w", encoding="utf-8") as f:
         json.dump({"total_num": leng, "data": slist}, f, ensure_ascii=False, indent=4)
     print("===舰船资料同步完成===")

@@ -1,0 +1,16 @@
+[tool.pdm]
+
+[project]
+name = ""
+version = ""
+description = ""
+authors = [
+    {name = "MRSlouzk", email = "MRSlouu@163.com"},
+]
+dependencies = [
+    "bs4>=0.0.1",
+    "pydantic>=1.10.7",
+    "httpx>=0.24.0",
+]
+requires-python = ">=3.10"
+license = {text = "MIT"}
