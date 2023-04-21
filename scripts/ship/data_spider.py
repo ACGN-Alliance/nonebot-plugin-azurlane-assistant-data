@@ -2,7 +2,7 @@ import os, json, re, pathlib
 
 from bs4 import BeautifulSoup
 
-from scripts.ship.ship_model import Ship
+from .ship_model import Ship
 from scripts.utils import get_content
 
 

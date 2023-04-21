@@ -1,7 +1,8 @@
 from bs4 import BeautifulSoup
 import re
 
-from scripts.build_simulator.init_pool import init_pool
+from .init_pool import init_pool
+
 from scripts.utils import get_content
 
 def build_data():
