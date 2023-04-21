@@ -1,10 +1,10 @@
 import sys, pathlib
 from concurrent.futures import ThreadPoolExecutor, wait
 
-from build_simulator.data_spider import build_data
-from build_simulator.history_pool import get_his_pool
-from ship.data_spider import ship_data
-from equip.spider import get_ori_page
+from scripts.build_simulator.data_spider import build_data
+from scripts.build_simulator.history_pool import get_his_pool
+from scripts.ship.data_spider import ship_data
+from scripts.equip.spider import get_ori_page
 
 sys.path.append(pathlib.Path.cwd().parent.as_posix())
 

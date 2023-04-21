@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-python scripts/main.py
+python main.py

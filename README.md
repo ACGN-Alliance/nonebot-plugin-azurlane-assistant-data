@@ -10,6 +10,7 @@
 # 数据内容
 - [建造池数据](https://github.com/MRSlouzk/nonebot-plugin-azurlane-assistant-data/blob/main/data/pool.json)
 - [舰船数据]()
+- [装备数据]()
 - 重樱/铁血船名对照(准备重构)
 - 井号榜图片(准备重构)
 
