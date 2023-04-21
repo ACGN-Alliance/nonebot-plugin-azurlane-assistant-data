@@ -43,13 +43,33 @@ def attrs_parse(data: NavigableString) -> dict:
                     break
 
                 # 二层嵌套
-                if ele_1.find_all("li"):
-                    for ele_2 in ele_1.find_all("li"):
-                        if not ele_2:
-                            break
-                        key_1 = ele_2.find("th").text
-                        res_dict[parent_ele][temp_key][key_1] = ele_2.find("td").text
-                    continue
+                if ele_1.find_all("ul"):
+                    che_lst = ele_1.find("ul").find_all("li", recursive=False)
+                    if che_lst:
+                        temp_key_2 = ""
+                        for k, ele_2 in enumerate(che_lst):
+                            if not ele_2:
+                                break
+
+                            if ele_2.find_all("li"):
+                                for ele_3 in ele_2.find_all("li"):
+                                    if not ele_3:
+                                        break
+                                    key_2 = ele_3.find("th").text
+                                    res_dict[parent_ele][temp_key][temp_key_2][key_2] = ele_3.find("td").text
+                                continue
+
+                            key_1 = ele_2.find("th").text
+                            # res_dict[parent_ele][temp_key][key_1] = ele_2.find("td").text
+                            try:
+                                if che_lst[k+1].find("li"):
+                                    temp_key_2 = key_1
+                                    res_dict[parent_ele][temp_key][key_1] = {}
+                                else:
+                                    res_dict[parent_ele][temp_key][key_1] = ele_2.find("td").text
+                            except IndexError:
+                                res_dict[parent_ele][temp_key][key_1] = ele_2.find("td").text
+                        continue
 
                 key = ele_1.find("th").text
                 try:
@@ -67,7 +87,7 @@ def parse_page_data(url: str) -> Tuple[str, dict]:
     page = get_content(url)
     soup = BeautifulSoup(page, "html.parser")
 
-    name = str(soup.find("b").find("a").text)
+    name = str(soup.find("ul", class_="equip").find("b").find("a").text)
     color = soup.find("ul", class_="equip").find_all("li")[0].get("style")
     if(color == "text-align:center;font-size:1.2em;background:linear-gradient(135deg,#59AE6A,#48AE96,#60D9EC,#65A5D5,#9491E0,#C382A4)"):
         rarity = 4
@@ -93,14 +113,26 @@ def parse_page_data(url: str) -> Tuple[str, dict]:
     suit_type = soup.find("ul", class_="equip").find_all("li")[-1].find("table").get("data-适用舰种")
     suit_type_lst = suit_type.split(",")
     suit_type_lst = [i for i in suit_type_lst if i]
-    eq = ShipEquip(
-        name=name,
-        rarity=rarity,
-        level=level,
-        type=type_,
-        attrs=attrs,
-        suit_type=suit_type_lst
-    )
+    name_lst = name.split("/")
+    if len(name_lst) == 1:
+        eq = ShipEquip(
+            name=name_lst[0],
+            rarity=rarity,
+            level=level,
+            type=type_,
+            attrs=attrs,
+            suit_type=suit_type_lst
+        )
+    else:
+        eq = ShipEquip(
+            name=name_lst[0],
+            alias=name_lst[1:],
+            rarity=rarity,
+            level=level,
+            type=type_,
+            attrs=attrs,
+            suit_type=suit_type_lst
+        )
 
     return (name, eq.dict(), )
 
@@ -116,6 +148,7 @@ def get_ori_page():
     new_file_lst = []
     for file in file_list:
         nfile = file.split(".")[0]
+        nfile = nfile.replace("\\", "/")
         new_file_lst.append(nfile)
     if(len(file_list) == len(soup.find_all("div", class_="divsort jntj-1"))):
         print("===装备资料无更新,跳过同步步骤===")
@@ -130,9 +163,11 @@ def get_ori_page():
         update_lst.append(prefix_url + url)
 
     print("共需要下载" + str(len(update_lst)) + "个装备资料\n")
+    from urllib.parse import unquote
     for i, url in enumerate(update_lst):
-        print("正在下载" + url.split("/")[-1] + f"的资料, 第{i+1}个")
+        print("正在下载" + unquote(url.split("/")[-1][0:-3]) + f"的资料, 第{i+1}个")
         data = parse_page_data(url)
-        with open(f"{pathlib.Path.cwd().parent}/azurlane/equip/{data[0]}.json", "w", encoding="utf-8") as f:
+        file_name = data[0].replace("/", "\\")
+        with open(f"{pathlib.Path.cwd().parent}/azurlane/equip/{file_name}.json", "w", encoding="utf-8") as f:
             f.write(json.dumps(data[1], ensure_ascii=False, indent=4))
         time.sleep(2)
