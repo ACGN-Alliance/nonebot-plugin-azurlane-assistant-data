@@ -3,7 +3,7 @@ import re
 
 from .init_pool import init_pool
 
-from scripts.utils import get_content
+from ..utils import get_content
 
 def build_data():
     print("===开始同步\"建造模拟器\"数据===")

@@ -3,7 +3,7 @@ import pathlib
 import time
 from urllib.parse import unquote
 
-from scripts.utils import get_content
+from ..utils import get_content
 from .model import ShipEquip
 
 from bs4 import BeautifulSoup, NavigableString

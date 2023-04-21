@@ -3,7 +3,7 @@ import os, json, re, pathlib
 from bs4 import BeautifulSoup
 
 from .ship_model import Ship
-from scripts.utils import get_content
+from ..utils import get_content
 
 
 def ship_data():
