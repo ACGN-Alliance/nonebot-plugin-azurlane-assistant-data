@@ -1,6 +1,5 @@
 from pydantic import BaseModel, Field, HttpUrl
-from typing import Tuple, Optional, Union, Dict, List
-from PIL import Image, ImageDraw, ImageFont
+from typing import List
 
 class ShipEquip(BaseModel):
     name: str
@@ -24,10 +23,10 @@ class ShipEquip(BaseModel):
         self.suit_type = data['suit_type']
         self.img_url = data['img_url']
 
-    def to_pic(self, f) -> bytes:
-        img = Image.new("RGBA", (576, 1000), (0, 0, 0, 120))
-        draw = ImageDraw.Draw(img)
-        draw.rectangle(xy=(0, 0, 576, 60), fill=(0, 0, 0, 180))
-
-        # return img.tobytes()
-        return img.save(f, format='JPEG')
+    # def to_pic(self, f) -> bytes:
+    #     img = Image.new("RGBA", (576, 1000), (0, 0, 0, 120))
+    #     draw = ImageDraw.Draw(img)
+    #     draw.rectangle(xy=(0, 0, 576, 60), fill=(0, 0, 0, 180))
+    #
+    #     # return img.tobytes()
+    #     return img.save(f, format='JPEG')
