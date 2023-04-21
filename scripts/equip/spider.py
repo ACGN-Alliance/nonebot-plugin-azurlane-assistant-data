@@ -2,6 +2,7 @@ import os, json
 import pathlib
 import time
 from typing import Tuple
+from urllib.parse import unquote
 
 from scripts.utils import get_content
 from .model import ShipEquip
@@ -83,7 +84,7 @@ def attrs_parse(data: NavigableString) -> dict:
 
     return res_dict
 
-def parse_page_data(url: str) -> Tuple[str, dict]:
+def parse_page_data(url: str) -> dict:
     page = get_content(url)
     soup = BeautifulSoup(page, "html.parser")
 
@@ -134,7 +135,7 @@ def parse_page_data(url: str) -> Tuple[str, dict]:
             suit_type=suit_type_lst
         )
 
-    return (name, eq.dict(), )
+    return eq.dict()
 
 def get_ori_page():
     prefix_url = "https://wiki.biligame.com"
@@ -147,7 +148,7 @@ def get_ori_page():
     file_list = os.listdir(f"{pathlib.Path.cwd().parent}/azurlane/equip")
     new_file_lst = []
     for file in file_list:
-        nfile = file.split(".")[0]
+        nfile = file[0:-5]
         nfile = nfile.replace("\\", "/")
         new_file_lst.append(nfile)
     if(len(file_list) == len(soup.find_all("div", class_="divsort jntj-1"))):
@@ -157,17 +158,16 @@ def get_ori_page():
     # 获取更新列表
     for ele in soup.find_all("div", class_="divsort jntj-1"):
         url = ele.find("a")["href"]
-        name = ele.find_all("a")[1].text[0:-2]
+        name = ele.find_all("a")[1].text
         if(name in new_file_lst):
             continue
-        update_lst.append(prefix_url + url)
+        update_lst.append((name, prefix_url + url))
 
     print("共需要下载" + str(len(update_lst)) + "个装备资料\n")
-    from urllib.parse import unquote
     for i, url in enumerate(update_lst):
-        print("正在下载" + unquote(url.split("/")[-1][0:-3]) + f"的资料, 第{i+1}个")
-        data = parse_page_data(url)
-        file_name = data[0].replace("/", "\\")
+        print("正在下载" + unquote(url[1].split("/")[-1][0:-3]) + f"的资料, 第{i+1}个")
+        data = parse_page_data(url[1])
+        file_name = url[0].replace("/", "\\")
         with open(f"{pathlib.Path.cwd().parent}/azurlane/equip/{file_name}.json", "w", encoding="utf-8") as f:
-            f.write(json.dumps(data[1], ensure_ascii=False, indent=4))
-        time.sleep(2)
+            f.write(json.dumps(data, ensure_ascii=False, indent=4))
+        time.sleep(1.5)
