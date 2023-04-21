@@ -1,13 +1,12 @@
 import os, json
 import pathlib
 import time
-from typing import Tuple
 from urllib.parse import unquote
 
 from scripts.utils import get_content
 from .model import ShipEquip
 
-from bs4 import BeautifulSoup, NavigableString, Tag
+from bs4 import BeautifulSoup, NavigableString
 
 def attrs_parse(data: NavigableString) -> dict:
     att_lst = data.find_all("li", recursive=False)
@@ -104,7 +103,7 @@ def parse_page_data(url: str) -> dict:
         raise Exception("稀有度出错" + name)
     level = str(soup.find("td", style="width:25%;vertical-align:top;font-size:2em").find("b").text)
     type_ = soup.find("div", style="width:100%;border:2px red solid;border-radius:2px;font-size:0.8em")
-    if type_ is not None:
+    if type_:
         type_ = str(type_.text)
     else:
         type_ = "特殊兵装"
@@ -151,7 +150,7 @@ def get_ori_page():
         nfile = file[0:-5]
         nfile = nfile.replace("\\", "/")
         new_file_lst.append(nfile)
-    if(len(file_list) == len(soup.find_all("div", class_="divsort jntj-1"))):
+    if len(file_list) == len(soup.find_all("div", class_="divsort jntj-1")):
         print("===装备资料无更新,跳过同步步骤===")
         return
 
@@ -159,7 +158,7 @@ def get_ori_page():
     for ele in soup.find_all("div", class_="divsort jntj-1"):
         url = ele.find("a")["href"]
         name = ele.find_all("a")[1].text
-        if(name in new_file_lst):
+        if name in new_file_lst:
             continue
         update_lst.append((name, prefix_url + url))
 
