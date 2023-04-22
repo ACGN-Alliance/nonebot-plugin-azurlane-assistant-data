@@ -25,7 +25,10 @@ def attrs_parse(data: NavigableString) -> dict:
             res_dict[key] = {}
             # 判断是否为单行属性
             if not att_lst[i+1].find_all("ul", class_="equip", recursive=False):
-                res_dict[key] = ele.find("td").text
+                try:
+                    res_dict[key] = ele.find("td").text
+                except AttributeError:
+                    res_dict[key] = ""
                 continue
 
             parent_ele = key
@@ -86,6 +89,13 @@ def attrs_parse(data: NavigableString) -> dict:
 def parse_page_data(url: str) -> dict:
     page = get_content(url)
     soup = BeautifulSoup(page, "html.parser")
+
+    app_level = ["T1", "T2", "T3"]
+    level = url[-2:]
+    if level not in app_level:
+        level = ""
+    if level:
+        soup = soup.find("div", id=f"TbPn-{level}")
 
     name = str(soup.find("ul", class_="equip").find("b").find("a").text)
     color = soup.find("ul", class_="equip").find_all("li")[0].get("style")
@@ -165,6 +175,7 @@ def get_ori_page():
     print("共需要下载" + str(len(update_lst)) + "个装备资料\n")
     for i, url in enumerate(update_lst):
         print("正在下载" + unquote(url[1].split("/")[-1][0:-3]) + f"的资料, 第{i+1}个")
+        # print(url[1])
         data = parse_page_data(url[1])
         file_name = url[0].replace("/", "\\")
         with open(f"{pathlib.Path.cwd().parent}/azurlane/equip/{file_name}.json", "w", encoding="utf-8") as f:
