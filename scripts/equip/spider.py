@@ -121,7 +121,7 @@ def parse_page_data(url: str) -> dict:
     attrs = attrs_parse(soup.find("ul", class_="equip"))
 
     suit_type = soup.find("ul", class_="equip").find_all("li")[-1].find("table").get("data-适用舰种")
-    suit_type_lst = suit_type.split(",")
+    suit_type_lst = suit_type.replace("、", ",").split(",")
     suit_type_lst = [i for i in suit_type_lst if i]
     name_lst = name.split("/")
     if len(name_lst) == 1:
@@ -158,7 +158,7 @@ def get_ori_page():
     new_file_lst = []
     for file in file_list:
         nfile = file[0:-5]
-        nfile = nfile.replace("\\", "/")
+        nfile = nfile.replace("_", "/")
         new_file_lst.append(nfile)
     if len(file_list) == len(soup.find_all("div", class_="divsort jntj-1")):
         print("===装备资料无更新,跳过同步步骤===")
@@ -177,7 +177,7 @@ def get_ori_page():
         print("正在下载" + unquote(url[1].split("/")[-1][0:-3]) + f"的资料, 第{i+1}个")
         # print(url[1])
         data = parse_page_data(url[1])
-        file_name = url[0].replace("/", "\\")
+        file_name = url[0].replace("/", "_")
         with open(f"{pathlib.Path.cwd().parent}/azurlane/equip/{file_name}.json", "w", encoding="utf-8") as f:
             f.write(json.dumps(data, ensure_ascii=False, indent=4))
-        time.sleep(1.5)
+        time.sleep(1)
