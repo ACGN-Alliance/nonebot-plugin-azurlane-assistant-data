@@ -174,10 +174,19 @@ def get_ori_page():
 
     print("共需要下载" + str(len(update_lst)) + "个装备资料\n")
     for i, url in enumerate(update_lst):
-        print("正在下载" + unquote(url[1].split("/")[-1][0:-3]) + f"的资料, 第{i+1}个")
+        percent = (i + 1) / len(update_lst) * 100
+        print("正在下载" + unquote(url[1].split("/")[-1][0:-3]) + f"的资料, 第{i+1}个, 进度{percent:.2f}%")
         # print(url[1])
         data = parse_page_data(url[1])
         file_name = url[0].replace("/", "_")
         with open(f"{pathlib.Path.cwd().parent}/azurlane/equip/{file_name}.json", "w", encoding="utf-8") as f:
             f.write(json.dumps(data, ensure_ascii=False, indent=4))
-        time.sleep(1)
+        time.sleep(0.5)
+
+    file_list = os.listdir(f"{pathlib.Path.cwd().parent}/azurlane/equip")
+    new_file_lst_1 = {}
+    for file in file_list:
+        nfile = file[0:-5]
+        nfile = nfile.replace("_", "/")
+        new_file_lst.append(nfile)
+    json.dump(new_file_lst_1, open(f"{pathlib.Path.cwd().parent}/azurlane/equip/equip_list.json", "w", encoding="utf-8"))
