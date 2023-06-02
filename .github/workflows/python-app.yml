@@ -29,6 +29,8 @@ jobs:
       run: sh autorun.sh
     - name: Commit
       run: |
+        cd data
+        git checkout -b data
         git config user.name github-actions[bot]
         git config user.email github-actions[bot]@users.noreply.github.com
         git commit -m "Update data" -a || exit 0
