@@ -9,8 +9,7 @@ on:
     - cron: "0 8 * * *"
   workflow_dispatch:
   
-permissions:
-  contents: write   
+permissions: write-all
 
 jobs:
   get_data:
