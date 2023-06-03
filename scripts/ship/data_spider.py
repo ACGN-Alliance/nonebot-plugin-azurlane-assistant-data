@@ -47,7 +47,7 @@ def ship_data():
 
         wiki_url = ship.find("a")["href"]
         img_url = ship.find("div", class_="jntj-2").find("img")["src"]
-        local_url = "img/ship_icon/" + name + ".png"
+        local_url = "data/img/ship_icon/" + name + ".png"
 
         ship = Ship(
             name=name,
@@ -60,6 +60,6 @@ def ship_data():
         sdata = ship.json(ensure_ascii=False)
         slist.append(json.loads(sdata))
 
-    with open(f"{str(pathlib.Path.cwd().parent)}/azurlane/ship.json", "w", encoding="utf-8") as f:
+    with open(f"{str(pathlib.Path.cwd().parent)}/data/azurlane/ship.json", "w", encoding="utf-8") as f:
         json.dump({"total_num": leng, "data": slist}, f, ensure_ascii=False, indent=4)
     print("===舰船资料同步完成===")
