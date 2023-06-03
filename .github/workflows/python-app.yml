@@ -27,11 +27,16 @@ jobs:
         pip install httpx bs4 pydantic
     - name: Run Scripts
       run: sh autorun.sh
-    - name: Commit
-      run: |
-        cd data
-        git config user.name github-actions[bot]
-        git config user.email github-actions[bot]@users.noreply.github.com
-        git commit -m "Update data" -a || exit 0
-        git push origin data --force
-        git push
+    - name: Push to another repository
+      # You may pin to the exact commit or the version.
+      # uses: kevocde/github-action-push-to-another-repository@e015a867ff2f9cc5e8e0302f0ac70631d261d983
+      uses: kevocde/github-action-push-to-another-repository@v0.1.1
+      with:
+        # Target repository URI
+        repository-uri: https://github.com/MRSlouzk/AZbot-data.git
+        # Target repository username
+        username: github-actions[bot]
+        # Target repository token or password
+        token: ${{ secrets.TOKEN }}
+        # Target repository branch
+        branch: master
