@@ -36,7 +36,7 @@ jobs:
         # Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}
         github_token: ${{ secrets.GITHUB_TOKEN }}
         # Repository name to push. Default or empty value represents current github repository (${GITHUB_REPOSITORY})
-        repository: MRSlouzk/AZbot-data # optional, default is 
+        repository: ACGN-Alliance/AZbot-data # optional, default is 
         # Destination branch to push changes
         # Determines if force push is used
         force: true # optional
