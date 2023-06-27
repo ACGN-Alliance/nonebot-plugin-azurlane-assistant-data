@@ -27,8 +27,7 @@ def build_data():
     init_data["tx"]["r"] = [i.text for i in soup.find(id="AircraftShipBuildingListRare").find_all("span", class_="AF")]
     init_data["tx"]["n"] = [i.text for i in soup.find(id="AircraftShipBuildingListNormal").find_all("span", class_="AF")]
 
-    cot1 = get_content("https://wiki.biligame.com/blhx/%E5%BB%BA%E9%80%A0%E6%A8%A1%E6%8B%9F%E5%99%A8/%E9%99%90"
-                             "%E6%97%B6%E5%BB%BA%E9%80%A0")
+    cot1 = get_content("https://wiki.biligame.com/blhx/%E5%BB%BA%E9%80%A0%E6%A8%A1%E6%8B%9F%E5%99%A8/%E9%99%90%E6%97%B6%E5%BB%BA%E9%80%A0")
     soup1 = BeautifulSoup(cot1, "html.parser")
     temp_lst = []
     for i in soup1.find_all("tr", class_="speciallist"):
