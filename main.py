@@ -11,12 +11,18 @@ from scripts.equip.spider import get_ori_page
 sys.path.append(pathlib.Path.cwd().parent.as_posix())
 
 if __name__ == '__main__':
-    with ThreadPoolExecutor(max_workers=2) as executor:
-        task1 = executor.submit(ship_data)
-        task2 = executor.submit(build_data)
-        task3 = executor.submit(get_his_pool)
-        task4 = executor.submit(get_ori_page)
+    # with ThreadPoolExecutor(max_workers=2) as executor:
+    #     task1 = executor.submit(ship_data)
+    #     task2 = executor.submit(build_data)
+    #     task3 = executor.submit(get_his_pool)
+    #     task4 = executor.submit(get_ori_page)
+    #
+    #     wait([task1, task2, task3, task4], return_when=ALL_COMPLETED)
+    #  多线程池方案无法使用
 
-        wait([task1, task2, task3, task4], return_when=ALL_COMPLETED)
+    ship_data()
+    build_data()
+    get_his_pool()
+    get_ori_page()
     print("=======数据同步完成=======")
     # get_ori_page()
