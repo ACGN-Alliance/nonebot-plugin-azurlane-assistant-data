@@ -35,7 +35,7 @@ def get_his_pool():
             pass
 
     import pathlib, json
-    with open(f"{str(pathlib.Path.cwd().parent)}/azurlane/his_pool.json", "w", encoding="utf-8") as f:
+    with open(f"{str(pathlib.Path.cwd().parent)}/data/azurlane/his_pool.json", "w", encoding="utf-8") as f:
         json.dump(his_data, f, ensure_ascii=False, indent=4)
 
     print("===历史建造池同步完成===")

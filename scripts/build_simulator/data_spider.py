@@ -1,3 +1,5 @@
+import os
+
 from bs4 import BeautifulSoup
 import re
 
@@ -64,7 +66,8 @@ def build_data():
     init_data["data"]["tx"]["n"] = rate[11]
 
     import pathlib, json
-    with open(f"{str(pathlib.Path.cwd().parent)}/data/azurlane/pool.json", "w", encoding="utf-8") as f:
+    file_dir = os.path.join(pathlib.Path.cwd().parent, "data/azurlane/pool.json")
+    with open(file_dir, "w", encoding="utf-8") as f:
         json.dump(init_data, f, ensure_ascii=False, indent=4)
 
     print("===同步\"建造模拟器\"数据完成===")
