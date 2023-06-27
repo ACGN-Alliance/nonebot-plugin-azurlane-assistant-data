@@ -14,7 +14,7 @@ def ship_data():
 
     leng = len(soup.find_all("div", class_="jntj-1 divsort"))
     print(os.getcwd())
-    if json.load(open(f"{str(pathlib.Path.cwd().parent)}/azurlane/ship.json", "r", encoding="utf-8"))["total_num"] == leng:
+    if json.load(open(f"{str(pathlib.Path.cwd().parent)}/data/azurlane/ship.json", "r", encoding="utf-8"))["total_num"] == leng:
         print("===舰船资料无更新,跳过同步步骤===")
         return
 
