@@ -13,7 +13,7 @@ def ship_data():
     soup = BeautifulSoup(cot, "html.parser")
 
     leng = len(soup.find_all("div", class_="jntj-1 divsort"))
-    file_dir = os.path.join(pathlib.Path.cwd().parent, "data/azurlane/ship.json")
+    file_dir = os.path.join(pathlib.Path.cwd(), "data/azurlane/ship.json")
     if os.path.exists(file_dir):
         if json.load(open(file_dir, "r", encoding="utf-8"))["total_num"] == leng:
             print("===舰船资料无更新,跳过同步步骤===")

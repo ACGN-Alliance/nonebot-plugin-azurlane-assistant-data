@@ -154,7 +154,10 @@ def get_ori_page():
     soup = BeautifulSoup(page, "html.parser")
 
     # 检查是否有更新
-    file_list = os.listdir(f"{pathlib.Path.cwd().parent}/data/azurlane/equip")
+    path = f"{pathlib.Path.cwd()}/data/azurlane/equip"
+    # if not os.path.exists(path):
+    #     os.mkdir(path)
+    file_list = os.listdir(path)
     new_file_lst = []
     for file in file_list:
         nfile = file[0:-5]
@@ -179,16 +182,16 @@ def get_ori_page():
         # print(url[1])
         data = parse_page_data(url[1])
         file_name = url[0].replace("/", "_")
-        file_dir = os.path.join(f"{pathlib.Path.cwd().parent}/data/azurlane/equip", f"{file_name}.json")
+        file_dir = os.path.join(f"{pathlib.Path.cwd()}/data/azurlane/equip", f"{file_name}.json")
         with open(file_dir, "w", encoding="utf-8") as f:
             f.write(json.dumps(data, ensure_ascii=False, indent=4))
         time.sleep(0.5)
 
-    file_list = os.listdir(f"{pathlib.Path.cwd().parent}/data/azurlane/equip")
+    file_list = os.listdir(f"{pathlib.Path.cwd()}/data/azurlane/equip")
     new_file_lst_1 = {}
     for file in file_list:
         nfile = file[0:-5]
         nfile = nfile.replace("_", "/")
         new_file_lst.append(nfile)
-    file_path = os.path.join(f"{pathlib.Path.cwd().parent}/data/azurlane/equip", "equip_list.json")
+    file_path = os.path.join(f"{pathlib.Path.cwd()}/data/azurlane/equip", "equip_list.json")
     json.dump(new_file_lst_1, open(file_path, "w", encoding="utf-8"))
