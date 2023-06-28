@@ -63,6 +63,10 @@ def ship_data():
         sdata = ship.json(ensure_ascii=False)
         slist.append(json.loads(sdata))
 
+    if not os.path.exists(file_dir):
+        os.makedirs(os.path.dirname(file_dir))
+        print(os.getcwd())
+
     with open(file_dir, "w", encoding="utf-8") as f:
         json.dump({"total_num": leng, "data": slist}, f, ensure_ascii=False, indent=4)
     print("===舰船资料同步完成===")
